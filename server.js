@@ -39,25 +39,22 @@ app.get('*', (request, response) => response.status(404).send('This route does n
 function Book(data){
   this.title = data.title,
   this.authors = data.authors,
-  this.description = data.description,
-  this.isbn = data.industryIdentifiers || 'NA',
-  this.image = data.imageLinks.smallThumbnail || 'NA';
+  this.description = data.description || 'description not available',
+  //this.isbn = data.industryIdentifiers || 'NA',
+  this.image = data.imageLinks.smallThumbnail || 'image not available';
 }
 
 
 function createSearch(req, response){
-  console.log('inside createSearch');
-  console.log('req body', req.body);
-  console.log('req body,search', req.body.search);
-
   let url= `https://www.googleapis.com/books/v1/volumes?q=in${req.body.searchField}:${req.body.search}`;
- 
-  superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    //
-    .then(data => response.send(data));
-}
 
+  superagent.get(url)
+    .then(results => {
+      const bookArray = (results.body.items.map(bookResult => new Book(bookResult.volumeInfo)));
+      console.log(bookArray);
+      // response.render('pages/searches/book', {books: bookArray});
+    });
+}
 
 
 app.post('/save', (req, res) => {
