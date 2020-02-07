@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>New!</title>
+</head>
+<body>
+  <main>
+    <%=bye %>
+    <form method="post" action="/searches">
+      <input type="text" name="search" placeholder="Title or Author">
+      <label for="title">Title</label>
+      <input type="radio" name="searchField" value="title" checked/>
+      <label for="author">Author</label>
+      <input type="radio" name="searchField" value="author" />
+      <button>Start your book journey!</button>
+    </form>
+  </main>
+  
+</body>
+</html>
