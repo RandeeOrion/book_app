@@ -47,17 +47,15 @@ function Book(data){
 
 function createSearch(req, response){
   console.log('inside createSearch');
-  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
   console.log('req body', req.body);
   console.log('req body,search', req.body.search);
 
-  if(req.body.title) {url +=`intitle:${req.body.search}`;}
-  if(req.body.author) {url +=`inauthor:${req.body.search}`;}
-  console.log(url);
+  let url= `https://www.googleapis.com/books/v1/volumes?q=in${req.body.searchField}:${req.body.search}`;
+ 
   superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo))
-    );
-
+    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
+    //
+    .then(data => response.send(data));
 }
 
 
