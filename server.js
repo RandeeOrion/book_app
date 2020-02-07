@@ -12,60 +12,54 @@ app.use(express.static('./public'));
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-app.get('/', (req, res) => {
-  res.render('pages/index.ejs');
-});
+
+app.get('/', renderHomePage);
+app.get('/searches/new', showForm);
+app.post('/searches', createSearch);
+
+
+function renderHomePage(request, response) {
+  response.render('pages/index');
+}
+
+
+
+function showForm(request, response) {
+  const hello = 'hello world';
+  response.render('pages/searches/new', {bye: hello});
+}
+
+
+app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 
 
 
 
+function Book(data){
+  this.title = data.title,
+  this.authors = data.authors,
+  this.description = data.description,
+  this.isbn = data.industryIdentifiers || 'NA',
+  this.image = data.imageLinks.smallThumbnail || 'NA';
+}
 
 
+function createSearch(req, response){
+  console.log('inside createSearch');
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+  console.log('req body', req.body);
+  console.log('req body,search', req.body.search);
 
-
-
-
-
-
-
-
-
-
-app.get('/book', (req, res) => {
-  // select * from some database ...
-  let book = {
-    title: 'cool things',
-    author: 'awesome person'
-  };
-  res.render('pages/book', { peanuts: book })
-  // res.status(200).json(book);
-});
-
-
-app.get('/food', (req, res) => {
-  let foods = ['cherries', 'choclate', 'sherry'];
-  res.render('pages/food', { ingredients: foods })
-})
-
-
-app.get('/search', (req, res) => {
-  console.log(req.query);
-  res.status(200).send('You did a GET');
-});
-
-
-app.post('/search', (req, res) => {
-  // what did the person type?
-  let title = req.body.title || "hockey";
-  // get a list from google
-  let url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`;
+  if(req.body.title) {url +=`intitle:${req.body.search}`;}
+  if(req.body.author) {url +=`inauthor:${req.body.search}`;}
+  console.log(url);
   superagent.get(url)
-    .then(data => {
-      // render the list in ejs
-      res.render('pages/books', { books: data.body.items })
-    })
-});
+    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo))
+    );
+
+}
+
 
 
 app.post('/save', (req, res) => {
@@ -76,46 +70,3 @@ app.post('/save', (req, res) => {
 
 
 app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// require('dotenv').config();
-
-// const PORT = process.env.PORT;
-// const superagent = require('superagent');
-// const express = require('express');
-// const app = express();
-
-// app.use(express.static('./public'));
-// app.set('view engine', 'ejs');
-// app.use(express.urlencoded({ extended: true }));
-
-// app.get('/', (req, res) => {
-//   res.render('pages/index.ejs');
-// });
-
-// app.get('/', (request, response) => {
-//   response.send('This still works!');
-// });
-
-
-// app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
