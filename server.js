@@ -52,7 +52,7 @@ function createSearch(req, response){
     .then(results => {
       const bookArray = (results.body.items.map(bookResult => new Book(bookResult.volumeInfo)));
       console.log(bookArray);
-      // response.render('pages/searches/show', {books: bookArray});
+      response.render('pages/searches/show', {books: bookArray});
     });
 }
 
