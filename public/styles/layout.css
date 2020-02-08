@@ -1,0 +1,47 @@
+@media (max-width: 768px){
+  body {
+    max-width: 768px;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  div {
+    margin: auto 5px;
+    background: lightblue;
+    border: solid black;
+    padding: 3px;
+  }
+  
+  div > p, img {
+    margin: auto;
+    padding: 2px;
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    max-width: 1000px;
+    /* margin: auto; */
+  }
+  
+  main {
+    max-width: 962px;
+  }
+
+
+  div {
+    margin: auto 5px;
+    background: lightgray;
+    border: solid slategray;
+    padding: 8%;
+    text-align: justify;
+    text-justify: center;
+  }
+  
+  div > p, img {
+    margin: auto;
+    padding: 2px;
+  }
+}

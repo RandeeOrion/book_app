@@ -3,26 +3,26 @@
 <head>
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/style/layout.css">
-  <link rel="stylesheet" href="/style/modules.css">
-  <link rel="stylesheet" href="/style/icons.css">
+  <link rel="stylesheet" href="/styles/layout.css">
+  <link rel="stylesheet" href="/styles/modules.css">
+  <link rel="stylesheet" href="/stylesicons.css">
   <title>Sue & Randee Book App</title>
 </head>
 <body>
   <h1>Book List</h1>
   <main>
-    <ol>
+    <ul>
     <% books.forEach( book => { %>
       <li>
         <div>
-          <p>Title: <%= book.title %></p>
-          <p>Authors: <%= book.authors %></p>
-          <p>Description: <%= book.description %></p>
           <img src="<%= book.image %>" alt="<%= book.title %>"/>
+          <p>Title:    <%= book.title %></p>
+          <p>Authors:    <%= book.authors %></p>
+          <p>Description:    <%= book.description %></p>
         </div>
       </li>
     <% }) %>
-  </ol>
+  </ul>
   </main>
 </body>
 </html>
