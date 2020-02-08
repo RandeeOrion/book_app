@@ -10,16 +10,17 @@
 </head>
 <body>
   <main>
-
-    <%=bye %>
-    <form method="post" action="/searches/show">
-      <input type="text" name="search" placeholder="Title or Author">
-      <label for="title">Title</label>
-      <input type="radio" name="searchField" value="title" checked/>
-      <label for="author">Author</label>
-      <input type="radio" name="searchField" value="author" />
-      <button>Start your book journey!</button>
-    </form>
+    <section>
+      <h2>Search by Title or Author</h2>
+      <form method="post" action="/searches/show">
+        <input type="text" name="search" placeholder="Title or Author">
+        <label for="title">Title</label>
+        <input type="radio" name="searchField" value="title" checked/>
+        <label for="author">Author</label>
+        <input type="radio" name="searchField" value="author" />
+        <button>Start your book journey!</button>
+      </form>
+  </section>
   </main>
   
 </body>
