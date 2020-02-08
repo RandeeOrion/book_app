@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/style/layout.css">
+  <link rel="stylesheet" href="/style/modules.css">
+  <link rel="stylesheet" href="/style/icons.css">
+  <title>Sue & Randee Book App</title>
+</head>
+<body>
+  <h1>Book List</h1>
+  <main>
+    <% bookArray.forEach( book => { %>
+    <li>
+      <%= book.title %>
+    </li>
+    <li>
+      <%= book.authors %>
+    </li>
+    <li>
+      <%= book.description %>
+    </li>
+    <li>
+      <%= book.image %>
+    </li>
+    <% }) %>
+  </main>
+</body>
+</html>
