@@ -11,20 +11,18 @@
 <body>
   <h1>Book List</h1>
   <main>
-    <% bookArray.forEach( book => { %>
-    <li>
-      <%= book.title %>
-    </li>
-    <li>
-      <%= book.authors %>
-    </li>
-    <li>
-      <%= book.description %>
-    </li>
-    <li>
-      <%= book.image %>
-    </li>
+    <ol>
+    <% books.forEach( book => { %>
+      <li>
+        <div>
+          <p>Title: <%= book.title %></p>
+          <p>Authors: <%= book.authors %></p>
+          <p>Description: <%= book.description %></p>
+          <img src="<%= book.image %>" alt="<%= book.title %>"/>
+        </div>
+      </li>
     <% }) %>
+  </ol>
   </main>
 </body>
 </html>

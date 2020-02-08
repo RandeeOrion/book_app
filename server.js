@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', renderHomePage);
 app.get('/searches/new', showForm);
-app.post('/searches', createSearch);
+app.post('/searches/show', createSearch);
 
 
 function renderHomePage(request, response) {
