@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const PORT = process.env.PORT;
 
+const pg = require('pg');
 const superagent = require('superagent');
 const express = require('express');
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', renderHomePage);
 app.get('/searches/new', showForm);
 app.post('/searches/show', createSearch);
+app.post('/books/detail', detailGoods);
 
 
 function renderHomePage(request, response) {
@@ -32,6 +34,9 @@ function showForm(request, response) {
 
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
+function detailGoods(request, response){
+  response.render('pages/books/detail.ejs', {form: request.body});
+}
 
 
 
@@ -51,7 +56,7 @@ function createSearch(req, response){
   superagent.get(url)
     .then(results => {
       const bookArray = (results.body.items.map(bookResult => new Book(bookResult.volumeInfo)));
-      console.log(bookArray);
+      // console.log(bookArray);
       response.render('pages/searches/show', {books: bookArray});
     });
 }
