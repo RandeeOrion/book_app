@@ -4,11 +4,12 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 
 const pg = require('pg');
-const client = new pg.Client('process.env.DATABASE_URL');
+const client = new pg.Client(process.env.DATABASE_URL);
 const superagent = require('superagent');
 const express = require('express');
 const app = express();
 
+client.connect();
 
 app.use(express.static('./public'));
 
@@ -22,7 +23,12 @@ app.post('/books/detail', detailGoods);
 
 
 function renderHomePage(request, response) {
-  response.render('pages/index');
+  let SQL = `SELECT * FROM books`;
+  client.query(SQL)
+    .then( data => {
+      console.log(data);
+      response.render('pages/index.ejs', {databaseBooks: data.rows});
+    });
 }
 
 
@@ -35,27 +41,18 @@ function showForm(request, response) {
 
 app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
+//sending details from the book clicked on books/searches to database and to the details page
 function detailGoods(request, response){
-  sendToDatabase(request);
-  console.log(),
-  response.render('pages/books/detail.ejs', {form: request.body});
+  let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+  let values = [request.body.authors, request.body.title, request.body.image, request.body.description, ' '];
+  console.log(values);
+  client.query(SQL, values)
+    .then (response.render('pages/books/detail.ejs', {form: request.body}));
 }
 
-function sendToDatabase(data){
-  let SQL = `INSERT INTO books_app (author, title, image_url, description) VALUES ($1, $2, $3, $4) RETURNING *`;
-  let values = [data.authors, data.title, data.image, data.description];
 
-  client.query(SQL, values);
-}
 
-app.get('/', request, results => {
-  let SQL = `SELECT * FROM books`;
-  client.query(SQL)
-    .then( results => {
-      // Need to send this through the constructor fucntion 
-      results.render('pages/index.ejs', { books: results.row});
-    });
-});
+
 
 
 
