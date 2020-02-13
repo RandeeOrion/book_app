@@ -14,12 +14,12 @@
    
   </header>
  <button><a href="/searches/new"/>Click Here!</button>
-
+    <h2>You have <%= databaseBooks.length %> books on your bookshelf!</h2>
     <ul>
     <% databaseBooks.forEach( book => { %>
       <li>
         <div>
-          <img src="<%= book.image %>" alt="<%= book.title %>"/>
+          <img src="<%= book.image_url %>" alt="<%= book.title %>"/>
           <p>Title:    <%= book.title %></p>
           <p>Authors:    <%= book.authors %></p>
         </div>

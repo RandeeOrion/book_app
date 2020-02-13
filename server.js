@@ -45,9 +45,11 @@ app.get('*', (request, response) => response.status(404).send('This route does n
 function detailGoods(request, response){
   let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
   let values = [request.body.authors, request.body.title, request.body.image, request.body.description, ' '];
-  console.log(values);
   client.query(SQL, values)
-    .then (response.render('pages/books/detail.ejs', {form: request.body}));
+    .then (response.render('pages/books/detail.ejs', {form: request.body}))
+    .catch ( () => {
+      errorHandler('Things are broken. Head to your local bookstore to find a good book on how the internet works.', request, response);
+    });
 }
 
 
@@ -77,9 +79,12 @@ function createSearch(req, response){
 }
 
 
+function errorHandler(error, request, response) {
+  response.status(500).send(error);
+}
+
+
 app.post('/save', (req, res) => {
-  console.log(req.query);
-  console.log(req.body);
   res.status(200).send('You did a POST');
 });
 
