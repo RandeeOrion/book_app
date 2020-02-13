@@ -7,11 +7,16 @@
 <body>
 
   <main>
-    <img src="<%= form.image %>" alt="<%= form.title %>"/>
-    <p><%= form.title %></p>
-    <p><%= form.authors %></p>
-    <p><%= form.description %></p>
+    <div>
+      <img src="<%= form.image_url %>" alt="<%= form.title %>"/>
+      <p><%= form.title %></p>
+      <p><%= form.authors %></p>
+      <p><%= form.description %></p>
+    </div>
     
+    <form method="post" action="/books/<%- form.id %>?_method=delete"> 
+      <button type="submit">REMOVE FOREVER</button>
+    </form>
   </main>
 </body>
 </html>
