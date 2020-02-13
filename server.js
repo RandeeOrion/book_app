@@ -28,6 +28,9 @@ function renderHomePage(request, response) {
     .then( data => {
       console.log(data);
       response.render('pages/index.ejs', {databaseBooks: data.rows});
+    })
+    .catch ( () => {
+      errorHandler('Things are broken. Head to your local bookstore to find a good book on how the internet works.', request, response);
     });
 }
 
@@ -75,6 +78,9 @@ function createSearch(req, response){
       const bookArray = (results.body.items.map(bookResult => new Book(bookResult.volumeInfo)));
       // console.log(bookArray);
       response.render('pages/searches/show', {books: bookArray});
+    })
+    .catch ( () => {
+      errorHandler('Things are broken. Head to your local bookstore to find a good book on how the internet works.', request, response);
     });
 }
 
