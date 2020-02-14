@@ -16,12 +16,14 @@
           <img class="image" src="<%= book.image_url %>" alt="<%= book.title %>"/>
           <p class="title">Title:    <%= book.title %></p>
           <p class="authors">Authors:    <%= book.authors %></p>
+          <p class="isbn">ISBN: <%= book.isbn %></p>
           <p>Description:    <%= book.description %></p> 
 <!--   creating the form that will get sent to the details page         -->
           <form method="post" action="/books/detail">
             <input type="hidden" name="image_url" value="<%= book.image_url %>">
             <input type="hidden" name="title" value="<%= book.title %>">
             <input type="hidden" name="authors" value="<%= book.authors %>">
+            <input type="hidden name="authors" value="<%= book.isbn %>">
             <input type="hidden" name="description" value="<%= book.description %>">
             <button class="button" type="submit">Add to your bookshelf</button>
           </form>

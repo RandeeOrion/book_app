@@ -1,20 +1,23 @@
 ul {
-  width: 100%
+  width: 300px;
+  margin: auto;
 }
 
 li {
   padding-top: 10px;
+  width: 100%;
 }
+
 
 .book {
   margin: auto;
-  max-width: 300px;
+  width: 100%;
   text-align: justify;
   max-height: 400px;
   overflow: scroll;
 }
 
-.title, .authors, .image {
+.title, .authors, .image .description {
   text-align: center;
   /* padding: 6px; */
   margin: auto;
@@ -26,5 +29,10 @@ li {
   font-size: 16px;
   font-weight: bold;
   margin: auto;
-  
 }
+
+form {
+  max-width: 300px;
+  margin: auto;
+}
+

@@ -3,6 +3,7 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <%- include('./partials/head') %>
+  <link rel="stylesheet" href="/styles/book.css">
   <title>Sue & Randee Book App</title>
 </head>
 <body>
@@ -15,10 +16,11 @@
     <ul>
     <% databaseBooks.forEach( book => { %>
       <li>
-        <div>
-          <img src="<%= book.image_url %>" alt="<%= book.title %>"/>
-          <p>Title:    <%= book.title %></p>
-          <p>Authors:    <%= book.authors %></p>
+        <div class="book">
+          <img class="image" src="<%= book.image_url %>" alt="<%= book.title %>"/>
+          <p class="title">Title:    <%= book.title %></p>
+          <p class="authors">Authors:    <%= book.author %></p>
+          <p class="authors">ISBN:    <%= book.isbn %></p>
           <a href="/books/<%= book.id %>">Show Details</a>
         </div>
       </li>
