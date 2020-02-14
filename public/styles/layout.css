@@ -44,4 +44,13 @@
     margin: auto;
     padding: 2px;
   }
+  
+  header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+  }
+
+
 }
