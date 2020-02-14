@@ -51,8 +51,8 @@ function showForm(request, response) {
 
 //sending details from the book clicked on books/searches to database and to the details page
 function detailGoods(request, response){
-  let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
-  let values = [request.body.authors, request.body.title, request.body.image_url, request.body.description, ' '];
+  let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf, isbn) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
+  let values = [request.body.authors, request.body.title, request.body.image_url, request.body.description, ' ', request.body.isbn];
   client.query(SQL, values)
     .then ( results => {
       request.body.id = results.rows[0].id;
