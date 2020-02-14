@@ -1,0 +1,30 @@
+ul {
+  width: 100%
+}
+
+li {
+  padding-top: 10px;
+}
+
+.book {
+  margin: auto;
+  max-width: 300px;
+  text-align: justify;
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.title, .authors, .image {
+  text-align: center;
+  /* padding: 6px; */
+  margin: auto;
+  
+}
+
+.button {
+  width: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  margin: auto;
+  
+}

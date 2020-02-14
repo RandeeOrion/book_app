@@ -22,8 +22,8 @@
 
 @media (min-width: 769px) {
   body {
-    max-width: 1000px;
-    /* margin: auto; */
+    min-width: 769px;
+    margin: auto;
   }
   
   main {
