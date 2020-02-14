@@ -24,6 +24,7 @@ app.get('/searches/new', showForm);
 app.post('/searches/show', createSearch);
 app.post('/books/detail', detailGoods);
 app.get('/books/:id', theGreatBook);
+app.put('/update/:id', updateBook);
 
 
 function renderHomePage(request, response) {
@@ -114,6 +115,29 @@ app.delete('/books/:id', (request, response) => {
       errorHandler('Things are broken. Head to your local bookstore to find a good book on how the internet works.', request, response);
     });
 });
+
+
+//update the database
+function updateBook(request, response) {
+  console.log('leo and kate are beautiful humans');
+  console.log(request.body);
+  let id = request.params.id;
+  let title = request.body.title;
+  let authors = request.body.authors;
+  let details = request.body.description;
+  // let image_url = request.body.image_url;
+  let SQL = `UPDATE books SET title=$1, description=$2, author=$3 WHERE id=$4 RETURNING id;`;
+  let values = [title, details, authors, id];
+  console.log(values);
+  client.query(SQL, values)
+    .then((results) => {
+      console.log(results.rows);
+      response.redirect(`/books/${id}`);
+    })
+    .catch( (error) => {
+      errorHandler(error, request, response);
+    });
+}
 
 function errorHandler(error, request, response) {
   response.status(500).send(error);
