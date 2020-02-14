@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <%- include('../partials/head') %>
+  <link rel="stylesheet" href="/styles/book.css">
   <title>Sue & Randee Book App</title>
 </head>
 <body>
@@ -10,11 +11,11 @@
     <ul>
     <% books.forEach( book => { %>
       <li>
-        <div>
+        <div class="book">
 <!--   creating the info to populate to the list of books found in search         -->
-          <img src="<%= book.image_url %>" alt="<%= book.title %>"/>
-          <p>Title:    <%= book.title %></p>
-          <p>Authors:    <%= book.authors %></p>
+          <img class="image" src="<%= book.image_url %>" alt="<%= book.title %>"/>
+          <p class="title">Title:    <%= book.title %></p>
+          <p class="authors">Authors:    <%= book.authors %></p>
           <p>Description:    <%= book.description %></p> 
 <!--   creating the form that will get sent to the details page         -->
           <form method="post" action="/books/detail">
@@ -22,7 +23,7 @@
             <input type="hidden" name="title" value="<%= book.title %>">
             <input type="hidden" name="authors" value="<%= book.authors %>">
             <input type="hidden" name="description" value="<%= book.description %>">
-            <button type="submit">Add to your bookshelf</button>
+            <button class="button" type="submit">Add to your bookshelf</button>
           </form>
         </div>
       </li>

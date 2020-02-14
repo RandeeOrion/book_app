@@ -1,6 +1,10 @@
 body {
+  width: 100%;
   color: darkblue;
- background-color: lightgoldenrodyellow;
- font-family: 'Open Sans', sans-serif;
+  background-color: lightgoldenrodyellow;
+  font-family: 'Open Sans', sans-serif;
 
+}
+main {
+  width: 100%;
 }
