@@ -3,24 +3,28 @@
 <head>
   <%- include('../partials/head') %>
   <link rel="stylesheet" href="/styles/book.css">
-  <title>Details!</title>
+  <title>Book Details!</title>
 </head>
 <body>
 
   <main>
-    <div>
-      <img src="<%= form.image_url %>" alt="<%= form.title %>"/>
-      <p><%= form.title %></p>
-      <p><%= form.authors %></p>
-      <p><%= form.description %></p>
-    </div>
+    <ul>
+      <li>
+        <div class="book">
+          <img class="image" src="<%= form.image_url %>" alt="<%= form.title %>"/>
+          <p class="title"><%= form.title %></p>
+          <p class="authors"><%= form.author %></p>
+          <p class="description"><%= form.description %></p>
+        </div>
+      </li>
+    </ul>
     
-    <form method="post" action="/books/<%- form.id %>?_method=delete"> 
+    <form class="delete" method="post" action="/books/<%- form.id %>?_method=delete"> 
       <button type="submit">REMOVE FOREVER</button>
     </form>
 
 
-    <form method="post" action="/update/<%- form.id %>?_method=put"> 
+    <form class="update" method="post" action="/update/<%- form.id %>?_method=put"> 
       <input type="text" name="title" value="<%- form.title %>" placeholder="Title">
       <textarea name="description" id="" cols="30" rows="10"><%- form.description %></textarea>
       <input type="text" name="authors" value="<%- form.authors %>" placeholder="Authors">

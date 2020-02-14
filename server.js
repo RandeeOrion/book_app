@@ -51,10 +51,13 @@ function showForm(request, response) {
 
 //sending details from the book clicked on books/searches to database and to the details page
 function detailGoods(request, response){
-  let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+  let SQL = `INSERT INTO books (author, title, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5) RETURNING id`;
   let values = [request.body.authors, request.body.title, request.body.image_url, request.body.description, ' '];
   client.query(SQL, values)
-    .then (response.render('pages/books/detail.ejs', {form: request.body}))
+    .then ( results => {
+      request.body.id = results.rows[0].id;
+      response.render('pages/books/detail.ejs', {form: request.body});
+    })
     .catch ( () => {
       errorHandler('Things are broken. Head to your local bookstore to find a good book on how the internet works.', request, response);
     });
@@ -83,7 +86,7 @@ function Book(data){
   this.title = data.title,
   this.authors = data.authors,
   this.description = data.description || 'description not available',
-  //this.isbn = data.industryIdentifiers || 'NA',
+  this.isbn = data.industryIdentifiers ? data.industryIdentifiers[0].identifier : 'no ISBN available',
   this.image_url = data.imageLinks.smallThumbnail || 'image not available';
 }
 
@@ -123,11 +126,11 @@ function updateBook(request, response) {
   console.log(request.body);
   let id = request.params.id;
   let title = request.body.title;
-  let authors = request.body.authors;
+  let author = request.body.authors;
   let details = request.body.description;
   // let image_url = request.body.image_url;
   let SQL = `UPDATE books SET title=$1, description=$2, author=$3 WHERE id=$4 RETURNING id;`;
-  let values = [title, details, authors, id];
+  let values = [title, details, author, id];
   console.log(values);
   client.query(SQL, values)
     .then((results) => {
