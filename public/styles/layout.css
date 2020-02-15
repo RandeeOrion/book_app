@@ -31,7 +31,7 @@
   }
 
 
-  div {
+  div {  
     margin: auto 5px;
     background: lightgray;
     border: solid slategray;
@@ -41,8 +41,10 @@
   }
   
   div > p, img {
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    padding: 2px;
+    padding: 10px;
   }
   
   header {
