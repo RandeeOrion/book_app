@@ -1,3 +1,9 @@
 header {
   background-color: lightgrey;
 }
+
+.nav_links {
+  background-color: slategrey;
+  color: lightgoldenrodyellow;
+  border-radius: ;
+}
