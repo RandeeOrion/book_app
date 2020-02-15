@@ -6,9 +6,8 @@
   <title>Sue & Randee Book App</title>
 </head>
 <body>
-  <header>
       <%- include('../partials/nav') %>
-  </header>
+
   <h1>Book List</h1>
   <main>
     <ul>
@@ -26,7 +25,7 @@
             <input type="hidden" name="image_url" value="<%= book.image_url %>">
             <input type="hidden" name="title" value="<%= book.title %>">
             <input type="hidden" name="authors" value="<%= book.authors %>">
-            <input type="hidden name="authors" value="<%= book.isbn %>">
+            <input type="hidden" name="isbn" value="<%= book.isbn %>">
             <input type="hidden" name="description" value="<%= book.description %>">
             <button class="button" type="submit">Add to your bookshelf</button>
           </form>
