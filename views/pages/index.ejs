@@ -8,16 +8,7 @@
 </head>
 <body>
   <header>
-    <!-- <img class="logo" src="/images/hamburgerMenu.svg" alt="logo"> -->
-    <nav>
-      <ul class="nav_links">
-        <li><a href="#">Home</a><li>
-        <li><a href="/searches/new">Search</a><li>
-      </ul>
-    </nav>
-    <!-- <a href="#menu">
-      <img src="/images/hamburgerMenu.svg" alt="">Home</a>
-      <a href="/searches/new"/>Click Here!</a> -->
+    <%- include('./partials/nav') %>
   </header>
     <h2>You have <%= databaseBooks.length %> books on your bookshelf!</h2>
     <ul>
